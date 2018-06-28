@@ -1,6 +1,12 @@
 $: << 'lib'
 require 'sage_pay/version'
 
+gem_version = if ENV['GEM_PRE_RELEASE'].nil? || ENV['GEM_PRE_RELEASE'].empty?
+                SagePay::VERSION
+              else
+                "#{SagePay::VERSION}.#{ENV['GEM_PRE_RELEASE']}"
+              end
+
 Gem::Specification.new do |s|
   s.specification_version = 2 if s.respond_to? :specification_version=
   s.required_ruby_version = '>= 1.9.2'
@@ -8,7 +14,7 @@ Gem::Specification.new do |s|
   s.rubygems_version = '1.3.6'
 
   s.name              = 'sage_pay'
-  s.version           = SagePay::VERSION
+  s.version           = gem_version
   s.date              = '2012-07-21'
   s.rubyforge_project = 'sage_pay'
 
